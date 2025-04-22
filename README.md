@@ -34,13 +34,15 @@ Used information gain and entropy to build decision rules.
 Implemented linear regression to analyze relationships between dependent and independent variables.
 Evaluated model performance using RMSE and R² scores.
 
-How to Run the Programs
+1. How to Run the Programs
 Clone the repository:
 git clone https://github.com/yourusername/dwm-practicals.git
 cd dwm-practicals
-Install dependencies:
+
+2. Install dependencies:
 pip install pandas numpy scikit-learn matplotlib
-Run individual scripts using Python:
+
+3. Run individual scripts using Python:
 python missing_values.py
 python etl_transformations.py
 python olap_operations.py
@@ -50,3 +52,6 @@ python knn.py
 python kmeans.py
 python decision_tree.py
 python linear_regression.py
+
+Note:
+This repository is maintained as part of the Semester VI DWM Practical coursework.
