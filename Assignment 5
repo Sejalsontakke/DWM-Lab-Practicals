@@ -1,0 +1,128 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "5UKanskYE3b9"
+      },
+      "source": [
+        "<h2>Name: Devansh Motghare</h2>\n",
+        "<h2>PRN: 22070521076</h2>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Mp2DTScB3Q1N",
+        "outputId": "27780468-f602-44b5-8e14-baf6704b892a"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "\n",
+            "Character Map Transformation:\n",
+            "    ID     Name  Age Country  Sales\n",
+            "0   1    ALICE   25     USA    200\n",
+            "1   2      BOB   30      UK    450\n",
+            "2   3  CHARLIE   35     USA    300\n",
+            "3   4    DAVID   40   India    800\n",
+            "4   5      EVE   22  Canada    150\n",
+            "5   6    FRANK   29      UK    400\n",
+            "\n",
+            "Multicast Transformation - Two copies created\n",
+            "\n",
+            "Conditional Split Transformation:\n",
+            "    ID   Name  Age Country  Sales\n",
+            "1   2    BOB   30      UK    450\n",
+            "3   4  DAVID   40   India    800\n",
+            "5   6  FRANK   29      UK    400\n",
+            "\n",
+            "Aggregation Transformation:\n",
+            "   Country  Sales\n",
+            "0  Canada    150\n",
+            "1   India    800\n",
+            "2      UK    850\n",
+            "3     USA    500\n",
+            "\n",
+            "Sorting Transformation:\n",
+            "    ID     Name  Age Country  Sales\n",
+            "3   4    DAVID   40   India    800\n",
+            "1   2      BOB   30      UK    450\n",
+            "5   6    FRANK   29      UK    400\n",
+            "2   3  CHARLIE   35     USA    300\n",
+            "0   1    ALICE   25     USA    200\n",
+            "4   5      EVE   22  Canada    150\n",
+            "\n",
+            "Derived Column Transformation:\n",
+            "    ID     Name  Age Country  Sales Sales Category\n",
+            "0   1    ALICE   25     USA    200            Low\n",
+            "1   2      BOB   30      UK    450           High\n",
+            "2   3  CHARLIE   35     USA    300            Low\n",
+            "3   4    DAVID   40   India    800           High\n",
+            "4   5      EVE   22  Canada    150            Low\n",
+            "5   6    FRANK   29      UK    400           High\n"
+          ]
+        }
+      ],
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "# Sample dataset\n",
+        "data = {\n",
+        "    'ID': [1, 2, 3, 4, 5, 6],\n",
+        "    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank'],\n",
+        "    'Age': [25, 30, 35, 40, 22, 29],\n",
+        "    'Country': ['USA', 'UK', 'USA', 'India', 'Canada', 'UK'],\n",
+        "    'Sales': [200, 450, 300, 800, 150, 400]\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# 1. Character Map Transformation - Convert Name column to uppercase\n",
+        "df['Name'] = df['Name'].str.upper()\n",
+        "print(\"\\nCharacter Map Transformation:\\n\", df)\n",
+        "\n",
+        "# 2. Multicast Transformation - Create copies of dataset\n",
+        "df_copy1 = df.copy()\n",
+        "df_copy2 = df.copy()\n",
+        "print(\"\\nMulticast Transformation - Two copies created\")\n",
+        "\n",
+        "# 3. Conditional Split Transformation - Filter rows where Sales > 300\n",
+        "df_filtered = df[df['Sales'] > 300]\n",
+        "print(\"\\nConditional Split Transformation:\\n\", df_filtered)\n",
+        "\n",
+        "# 4. Aggregation Transformation - Total sales per country\n",
+        "df_aggregated = df.groupby('Country')['Sales'].sum().reset_index()\n",
+        "print(\"\\nAggregation Transformation:\\n\", df_aggregated)\n",
+        "\n",
+        "# 5. Sorting Transformation - Sort by Sales in descending order\n",
+        "df_sorted = df.sort_values(by='Sales', ascending=False)\n",
+        "print(\"\\nSorting Transformation:\\n\", df_sorted)\n",
+        "\n",
+        "# 6. Derived Column Transformation - Categorize Sales as High or Low\n",
+        "df['Sales Category'] = df['Sales'].apply(lambda x: 'High' if x > 300 else 'Low')\n",
+        "print(\"\\nDerived Column Transformation:\\n\", df)\n"
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
